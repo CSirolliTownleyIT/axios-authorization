@@ -1,4 +1,3 @@
-import Base64 from 'base-64'
 import { TokenType } from "../Enums";
 import type { IToken, BasicTokenOptions, JSONTokenFormat } from "../Types";
 
@@ -23,7 +22,7 @@ export class BasicToken implements IToken {
 
     toString() {
         const payload = `${this.username}:${this.password}`
-        const token = Base64.encode(payload)
+        const token = Buffer.from(payload).toString('base64')
         return `${TokenType.Basic} ${token}`
     }
 }
