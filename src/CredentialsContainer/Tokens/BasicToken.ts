@@ -22,7 +22,7 @@ export class BasicToken implements IToken {
 
     toString() {
         const payload = `${this.username}:${this.password}`
-        const token = Buffer.from(payload).toString('base64')
+        const token = Boolean(globalThis.Buffer) ? Buffer.from(payload).toString('base64') : btoa(payload)
         return `${TokenType.Basic} ${token}`
     }
 }
